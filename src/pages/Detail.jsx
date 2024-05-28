@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import InputAdd from "../components/InputAdd";
+import { DataContext } from "../context/DataContext";
+import GlobalStyle from "../styles/GlobalStyle";
+import styled from "styled-components";
 
-function Detail({ data, setData }) {
+const Line2 = styled.ul`
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+`;
+
+function Detail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { data, setData } = useContext(DataContext);
 
   const expense = data.find((item) => item.id === id);
 
@@ -42,35 +52,37 @@ function Detail({ data, setData }) {
 
   return (
     <div>
-      <h2>Detail Page</h2>
+      <Line2>
+        <GlobalStyle />
 
-      <InputAdd
-        label="날짜"
-        type="DATE"
-        value={updatedDate}
-        onChange={(e) => setUpdatedDate(e.target.value)}
-      />
-      <InputAdd
-        label="항목"
-        type="text"
-        value={updatedList}
-        onChange={(e) => setUpdatedList(e.target.value)}
-      />
-      <InputAdd
-        label="금액"
-        type="number"
-        value={updatedMoney}
-        onChange={(e) => setUpdatedMoney(e.target.value)}
-      />
-      <InputAdd
-        label="내용"
-        type="text"
-        value={updatedDetail}
-        onChange={(e) => setUpdatedDetail(e.target.value)}
-      />
-      <button onClick={handleUpdate}>수정</button>
-      <button onClick={handleDelete}>삭제</button>
-      <button onClick={handleBack}>뒤로가기</button>
+        <InputAdd
+          label="날짜"
+          type="DATE"
+          value={updatedDate}
+          onChange={(e) => setUpdatedDate(e.target.value)}
+        />
+        <InputAdd
+          label="항목"
+          type="text"
+          value={updatedList}
+          onChange={(e) => setUpdatedList(e.target.value)}
+        />
+        <InputAdd
+          label="금액"
+          type="number"
+          value={updatedMoney}
+          onChange={(e) => setUpdatedMoney(e.target.value)}
+        />
+        <InputAdd
+          label="내용"
+          type="text"
+          value={updatedDetail}
+          onChange={(e) => setUpdatedDetail(e.target.value)}
+        />
+        <button onClick={handleUpdate}>수정</button>
+        <button onClick={handleDelete}>삭제</button>
+        <button onClick={handleBack}>뒤로가기</button>
+      </Line2>
     </div>
   );
 }

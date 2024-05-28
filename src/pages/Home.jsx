@@ -1,9 +1,10 @@
-import { useState } from "react";
-import GlobalStyle from "../GlobalStyle";
+import React, { useState, useContext } from "react";
+import GlobalStyle from "../styles/GlobalStyle";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import InputAdd from "../components/InputAdd";
 import { useNavigate } from "react-router-dom";
+import { DataContext } from "../context/DataContext";
 
 const Button = styled.button`
   background-color: black;
@@ -17,9 +18,11 @@ const Button = styled.button`
   width: 150px;
   height: 60px;
 `;
+
 const Div1 = styled.div`
   padding: 10px;
 `;
+
 const Section = styled.section`
   background-color: aqua;
   max-width: 800px;
@@ -32,6 +35,7 @@ const Section = styled.section`
   border-radius: 10px;
   padding: 10px 10px;
 `;
+
 const Div2 = styled.div`
   background-color: aqua;
   max-width: 800px;
@@ -41,13 +45,15 @@ const Div2 = styled.div`
   margin: 0 auto;
   margin-top: 20px;
 `;
+
 const Line1 = styled.li`
   border: 1px solid black;
   border-radius: 10px;
   padding: 5px;
 `;
 
-function Home({ data, setData }) {
+function Home() {
+  const { data, setData } = useContext(DataContext);
   const [moneyList, setMoneyList] = useState(data);
   const [newDate, setNewDate] = useState("");
   const [newList, setNewList] = useState("");
@@ -83,6 +89,7 @@ function Home({ data, setData }) {
     "11월",
     "12월",
   ];
+
   const handelMonthClick = (month) => {
     setMonth(month);
   };
